@@ -16,14 +16,14 @@ export default function Navbar() {
             to="/"
             className={pathname === "/" ? "" : "text-neutral-500"}
           >
-            Projects
+            Home
           </Link>
 
           <Link
-            to="/about"
-            className={pathname === "/about" ? "" : "text-neutral-500"}
+            to="/projects"
+            className={pathname === "/projects" ? "" : "text-neutral-500"}
           >
-            About
+            Projects
           </Link>
 
           <Link
