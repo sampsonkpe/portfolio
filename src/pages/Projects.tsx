@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 /* ================= DATA ================= */
 
@@ -92,9 +93,9 @@ function getColor(tech: string) {
 /* ================= CARD ================= */
 
 function Card({ project, onClick }: any) {
+  const [expanded, setExpanded] = useState(false);
+
   const MAX = 3;
-  const visible = project.stack.slice(0, MAX);
-  const remaining = project.stack.length - MAX;
 
   return (
     <div className="group rounded-xl overflow-hidden bg-card border border-border hover:shadow-lg transition">
@@ -129,30 +130,43 @@ function Card({ project, onClick }: any) {
           {/* STACK */}
           <div className="flex flex-wrap gap-3 max-w-[80%]">
 
-            {/* visible */}
-            {visible.map((tech: string) => (
-              <div key={tech} className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span className={`h-2 w-2 rounded-full ${getColor(tech)}`} />
-                {tech}
-              </div>
-            ))}
+            {!expanded && (
+              <>
+                {project.stack.slice(0, MAX).map((tech: string) => (
+                  <div key={tech} className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <span className={`h-2 w-2 rounded-full ${getColor(tech)}`} />
+                    {tech}
+                  </div>
+                ))}
 
-            {/* +more (mobile only) */}
-            {remaining > 0 && (
-              <div className="text-xs text-muted-foreground sm:hidden">
-                +{remaining} more
-              </div>
+                {project.stack.length > MAX && (
+                  <button
+                    onClick={() => setExpanded(true)}
+                    className="text-xs italic text-muted-foreground hover:underline"
+                  >
+                    +{project.stack.length - MAX} more
+                  </button>
+                )}
+              </>
             )}
 
-            {/* full stack (desktop) */}
-            <div className="hidden sm:flex flex-wrap gap-3">
-              {project.stack.slice(MAX).map((tech: string) => (
-                <div key={tech} className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <span className={`h-2 w-2 rounded-full ${getColor(tech)}`} />
-                  {tech}
-                </div>
-              ))}
-            </div>
+            {expanded && (
+              <>
+                {project.stack.map((tech: string) => (
+                  <div key={tech} className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <span className={`h-2 w-2 rounded-full ${getColor(tech)}`} />
+                    {tech}
+                  </div>
+                ))}
+
+                <button
+                  onClick={() => setExpanded(false)}
+                  className="text-xs italic text-muted-foreground hover:underline"
+                >
+                  show less
+                </button>
+              </>
+            )}
 
           </div>
 
@@ -193,11 +207,36 @@ function Modal({ project, onClose }: any) {
       <div className="bg-card border border-border rounded-xl max-w-2xl w-full overflow-hidden" onClick={(e) => e.stopPropagation()}>
 
         <div
-          className="relative"
+          className="relative overflow-hidden"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+          onTouchEnd={() => setPaused(false)}
         >
-          <img src={project.images[index]} className="w-full aspect-video object-cover transition-opacity duration-700" />
+          <motion.img
+            key={index}
+            src={project.images[index]}
+            className="w-full aspect-video object-cover"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            onDragEnd={(e, info) => {
+              const threshold = 50;
+
+              if (info.offset.x < -threshold) {
+                // swipe left
+                setIndex((i: number) => (i + 1) % project.images.length);
+              } else if (info.offset.x > threshold) {
+                // swipe right
+                setIndex((i: number) =>
+                  (i - 1 + project.images.length) % project.images.length
+                );
+              }
+            }}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -40 }}
+            transition={{ duration: 0.3 }}
+          />
         </div>
 
         <div className="p-6">
