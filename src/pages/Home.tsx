@@ -87,7 +87,7 @@ export default function Home() {
                                 : tech === "React"
                                 ? "bg-cyan-400"
                                 : tech === "Django"
-                                ? "bg-pink-600"
+                                ? "bg-pink-500"
                                 : tech === "PostgreSQL"
                                 ? "bg-teal-600"
                                 : "bg-neutral-400"
