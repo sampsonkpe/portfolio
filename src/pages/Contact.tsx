@@ -44,7 +44,14 @@ export default function Contact() {
             rel="noopener noreferrer"
             className="flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-card hover:shadow-sm"
           >
-            <img src="/icons/github.png" className="h-5 w-5 dark:invert" />
+            <img
+              src="/icons/github-light.png"
+              className="h-6 w-6 dark:hidden"
+            />
+            <img
+              src="/icons/github-dark.png"
+              className="h-6 w-6 hidden dark:block"
+             />
           </a>
 
           <a
@@ -75,7 +82,7 @@ export default function Contact() {
             className="mt-12 inline-flex items-center justify-center rounded-lg bg-foreground px-6 py-3 text-sm font-medium text-background transition-all duration-300 hover:opacity-80 hover:shadow-lg"
           >
             <Download className="h-4 w-4" />
-            Download Resume
+            Resume
           </a>
         </div>
 

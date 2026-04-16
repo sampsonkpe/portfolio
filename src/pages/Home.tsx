@@ -55,7 +55,7 @@ export default function Home() {
                       <a
                         href={project.demo}
                         target="_blank"
-                        className="text-xs text-primary hover:underline"
+                        className="text-sm text-primary hover:underline"
                       >
                         Live Demo
                       </a>
@@ -89,7 +89,7 @@ export default function Home() {
                                 : tech === "Django"
                                 ? "bg-pink-500"
                                 : tech === "PostgreSQL"
-                                ? "bg-teal-600"
+                                ? "bg-teal-200"
                                 : "bg-neutral-400"
                             }`}
                           />
