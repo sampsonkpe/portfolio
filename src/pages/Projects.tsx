@@ -92,10 +92,13 @@ function getColor(tech: string) {
 /* ================= CARD ================= */
 
 function Card({ project, onClick }: any) {
+  const MAX = 3;
+  const visible = project.stack.slice(0, MAX);
+  const remaining = project.stack.length - MAX;
+
   return (
     <div className="group rounded-xl overflow-hidden bg-card border border-border hover:shadow-lg transition">
 
-      {/* CLICKABLE IMAGE */}
       <div onClick={onClick} className="cursor-pointer">
         <div className="aspect-video overflow-hidden">
           <img
@@ -107,7 +110,6 @@ function Card({ project, onClick }: any) {
 
       <div className="p-5 flex flex-col gap-3">
 
-        {/* TOP ROW */}
         <div className="flex justify-between items-center">
           <h3 className="font-semibold">{project.title}</h3>
 
@@ -118,27 +120,45 @@ function Card({ project, onClick }: any) {
           )}
         </div>
 
-        {/* DESCRIPTION */}
         <p className="text-sm text-muted-foreground">
           {project.description}
         </p>
 
-        {/* BOTTOM ROW */}
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
 
           {/* STACK */}
-          <div className="flex flex-wrap gap-3">
-            {project.stack.map((tech: string) => (
+          <div className="flex flex-wrap gap-3 max-w-[80%]">
+
+            {/* visible */}
+            {visible.map((tech: string) => (
               <div key={tech} className="flex items-center gap-2 text-xs text-muted-foreground">
                 <span className={`h-2 w-2 rounded-full ${getColor(tech)}`} />
                 {tech}
               </div>
             ))}
+
+            {/* +more (mobile only) */}
+            {remaining > 0 && (
+              <div className="text-xs text-muted-foreground sm:hidden">
+                +{remaining} more
+              </div>
+            )}
+
+            {/* full stack (desktop) */}
+            <div className="hidden sm:flex flex-wrap gap-3">
+              {project.stack.slice(MAX).map((tech: string) => (
+                <div key={tech} className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <span className={`h-2 w-2 rounded-full ${getColor(tech)}`} />
+                  {tech}
+                </div>
+              ))}
+            </div>
+
           </div>
 
           {/* GITHUB */}
           {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer">
+            <a href={project.github} target="_blank" className="self-end sm:self-auto">
               <img src="/icons/github-light.png" className="h-6 w-6 dark:hidden" />
               <img src="/icons/github-dark.png" className="h-6 w-6 hidden dark:block" />
             </a>
@@ -169,74 +189,40 @@ function Modal({ project, onClose }: any) {
   if (!project) return null;
 
   return (
-    <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center px-6 z-50"
-      onClick={onClose}
-    >
-      <div
-        className="bg-card border border-border rounded-xl max-w-2xl w-full overflow-hidden"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center px-6 z-50" onClick={onClose}>
+      <div className="bg-card border border-border rounded-xl max-w-2xl w-full overflow-hidden" onClick={(e) => e.stopPropagation()}>
 
-        {/* IMAGE SLIDER */}
         <div
           className="relative"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
-          onTouchStart={() => setPaused(true)}
-          onTouchEnd={() => setPaused(false)}
         >
-          <img
-            src={project.images[index]}
-            className="w-full aspect-video object-cover transition-opacity duration-700"
-          />
+          <img src={project.images[index]} className="w-full aspect-video object-cover transition-opacity duration-700" />
         </div>
 
-        {/* CONTENT */}
         <div className="p-6">
-
           <h2 className="text-lg font-semibold">{project.title}</h2>
+          <p className="text-sm text-muted-foreground mt-2">{project.description}</p>
 
-          <p className="text-sm text-muted-foreground mt-2">
-            {project.description}
-          </p>
-
-          {/* FEATURES */}
           <ul className="mt-4 space-y-1 text-sm">
-            {project.features.map((f: string) => (
-              <li key={f}>• {f}</li>
-            ))}
+            {project.features.map((f: string) => <li key={f}>• {f}</li>)}
           </ul>
 
-          {/* STACK */}
-          <div className="flex flex-wrap gap-3 mt-5">
-            {project.stack.map((tech: string) => (
-              <div key={tech} className="flex items-center gap-2 text-xs text-muted-foreground">
-                <span className={`h-2 w-2 rounded-full ${getColor(tech)}`} />
-                {tech}
-              </div>
-            ))}
-          </div>
-
-          {/* LINKS */}
           <div className="flex justify-between items-center mt-6">
-
             {project.github && (
-              <a href={project.github} target="_blank" rel="noopener noreferrer">
+              <a href={project.github} target="_blank">
                 <img src="/icons/github-light.png" className="h-6 w-6 dark:hidden" />
                 <img src="/icons/github-dark.png" className="h-6 w-6 hidden dark:block" />
               </a>
             )}
-
             {project.demo && (
               <a href={project.demo} target="_blank" className="text-sm text-primary hover:underline">
                 Live Demo
               </a>
             )}
-
           </div>
-
         </div>
+
       </div>
     </div>
   );
@@ -248,36 +234,22 @@ export default function Projects() {
   const [selected, setSelected] = useState<any>(null);
 
   return (
-    <main className="pt-24 px-6 pb-24">
-      <div className="mx-auto max-w-5xl text-center">
+    <main className="pt-24 px-6 pb-16">
+      <div className="mx-auto max-w-5xl">
 
-        <h1 className="text-2xl font-semibold mb-12">
-          Projects
-        </h1>
+        <h1 className="text-2xl font-semibold text-center mb-12">Projects</h1>
 
-        {/* ONGOING */}
         <section className="mb-24">
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-6">
-            Ongoing
-          </h2>
-
-          <div className="grid gap-6 sm:grid-cols-2 text-left">
-            {ongoing.map((p) => (
-              <Card key={p.title} project={p} onClick={() => setSelected(p)} />
-            ))}
+          <h2 className="text-sm uppercase tracking-widest text-muted-foreground text-center mb-6">Ongoing</h2>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {ongoing.map((p) => <Card key={p.title} project={p} onClick={() => setSelected(p)} />)}
           </div>
         </section>
 
-        {/* COMPLETED */}
         <section>
-          <h2 className="text-sm uppercase tracking-widest text-muted-foreground mb-6">
-            Completed
-          </h2>
-
-          <div className="grid gap-6 sm:grid-cols-2 text-left">
-            {completed.map((p) => (
-              <Card key={p.title} project={p} onClick={() => setSelected(p)} />
-            ))}
+          <h2 className="text-sm uppercase tracking-widest text-muted-foreground text-center mb-6">Completed</h2>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {completed.map((p) => <Card key={p.title} project={p} onClick={() => setSelected(p)} />)}
           </div>
         </section>
 
