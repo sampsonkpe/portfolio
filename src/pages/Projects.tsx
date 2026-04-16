@@ -219,7 +219,7 @@ function Modal({ project, onClose }: any) {
             className="w-full aspect-video object-cover"
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
-            onDragEnd={(e, info) => {
+            onDragEnd={(_e, info) => {
               const threshold = 50;
 
               if (info.offset.x < -threshold) {
