@@ -1,9 +1,9 @@
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Download } from "lucide-react";
 
 export default function Contact() {
   return (
     <main className="pt-24 px-6 pb-24">
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-3xl text-center">
 
         <h1 className="text-2xl font-semibold text-foreground">
           Contact
@@ -44,7 +44,7 @@ export default function Contact() {
             rel="noopener noreferrer"
             className="flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-card hover:shadow-sm"
           >
-            <img src="/icons/github.png" className="h-5 w-5" />
+            <img src="/icons/github.png" className="h-5 w-5 dark:invert" />
           </a>
 
           <a
@@ -72,8 +72,9 @@ export default function Contact() {
           <a
             href="/CURRICULUMVITAE.pdf"
             download
-            className="inline-flex items-center justify-center rounded-lg bg-foreground px-6 py-3 text-sm font-medium text-background transition-all duration-300 hover:opacity-80 hover:shadow-lg"
+            className="mt-12 inline-flex items-center justify-center rounded-lg bg-foreground px-6 py-3 text-sm font-medium text-background transition-all duration-300 hover:opacity-80 hover:shadow-lg"
           >
+            <Download className="h-4 w-4" />
             Download Resume
           </a>
         </div>

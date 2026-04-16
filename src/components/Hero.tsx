@@ -1,27 +1,45 @@
 export default function Hero() {
   return (
-    <section className="flex flex-col items-center justify-center text-center py-24 md:py-32 px-6">
+    <section className="flex flex-col items-center justify-center text-center pt-10 pb-10 px-6">
+      
+      {/* NAME */}
       <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-foreground">
         Sampson Kojo Kpe
       </h1>
 
-      <p className="mt-3 text-lg md:text-xl font-medium text-primary">
+      {/* ROLE */}
+      <p className="mt-8 text-lg md:text-xl font-medium text-primary">
         Backend Developer • IT Support
       </p>
 
-      <p className="mt-4 max-w-md text-muted-foreground text-base">
+      {/* TAGLINE */}
+      <p className="mt-3 max-w-lg text-muted-foreground text-base">
         Building clean, performant web experiences with modern tools.
       </p>
 
+      {/* CTA */}
       <a
         href="https://github.com/sampsonkpe"
         target="_blank"
         rel="noopener noreferrer"
         title="Visit my GitHub profile"
-        className="mt-8 inline-flex items-center gap-2 rounded-lg bg-foreground px-6 py-3 text-sm font-medium text-background transition-all duration-300 hover:opacity-80 hover:scale-105 hover:shadow-lg active:scale-100"
+        className="mt-8 inline-flex items-center gap-2 rounded-lg bg-foreground px-6 py-3 text-sm font-medium text-background transition hover:opacity-80 hover:scale-[1.02]"
       >
+        {/* Light mode icon */}
+        <img
+          src="/icons/github-dark.png"
+          className="h-6 w-6 dark:hidden"
+        />
+
+        {/* Dark mode icon */}
+        <img
+          src="/icons/github-light.png"
+          className="h-6 w-6 hidden dark:block"
+        />
+
         GitHub
       </a>
+
     </section>
   );
 }
