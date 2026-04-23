@@ -30,7 +30,7 @@ const ongoing = [
     ],
     stack: ["JavaScript", "Python", "React", "Django"],
     github: "https://github.com/sampsonkpe/ride-compare",
-    demo: "https://ridecompare-co.lovable.app/",
+    demo: "https://ridecompare-co.vercel.app/",
   }
 ];
 

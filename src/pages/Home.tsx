@@ -110,7 +110,7 @@ const preview = [
     image: "/project-2.png",
     stack: ["JavaScript", "Python", "CSS", "HTML", "React"],
     github: "https://github.com/sampsonkpe/ride-compare",
-    demo: "https://ridecompare-co.lovable.app/",
+    demo: "https://ridecompare-co.vercel.app/",
   },
 ];
 
