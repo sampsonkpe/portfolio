@@ -62,18 +62,6 @@ const completed = [
     github: "https://github.com/sampsonkpe/wistech",
     demo: "https://wistech.vercel.app/",
   },
-  {
-    title: "AI Job Aggregator",
-    description: "AI-powered job discovery platform",
-    images: ["/project-4.png", "/project-4b.png", "/project-4c.png"],
-    features: [
-      "Aggregated AI job listings",
-      "Save and track opportunities",
-    ],
-    stack: ["TypeScript", "JavaScript", "HTML", "CSS"],
-    github: "",
-    demo: "https://jradar.lovable.app/",
-  },
 ];
 
 /* ================= UTIL ================= */
