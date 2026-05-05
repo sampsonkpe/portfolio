@@ -9,12 +9,12 @@ export default function Hero() {
 
       {/* ROLE */}
       <p className="mt-8 text-lg md:text-xl font-medium text-primary">
-        Backend Developer • IT Support
+        Backend Developer | Systems & IT Support
       </p>
 
       {/* TAGLINE */}
       <p className="mt-3 max-w-lg text-muted-foreground text-base">
-        Building clean, performant web experiences with modern tools.
+        Turning complex problems into simple, scalable backend systems and reliable IT solutions.
       </p>
 
       {/* CTA */}
