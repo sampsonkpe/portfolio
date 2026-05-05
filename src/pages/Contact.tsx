@@ -52,6 +52,15 @@ export default function Contact() {
           </a>
 
           <a
+            href="https://www.linkedin.com/in/sampson-kpe-394537267/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex h-14 w-14 items-center justify-center rounded-xl border border-border bg-card hover:shadow-sm"
+          >
+            <img src="/icons/linkedin.png" className="h-5 w-5" />
+          </a>
+
+          <a
             href="https://instagram.com/sampsonkpe/"
             target="_blank"
             rel="noopener noreferrer"
