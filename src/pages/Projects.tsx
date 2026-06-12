@@ -31,6 +31,20 @@ const ongoing = [
     stack: ["JavaScript", "Python", "React", "Django"],
     github: "https://github.com/sampsonkpe/ride-compare",
     demo: "https://ridecompare-co.vercel.app/",
+  },
+  {
+    title: "KAHWƐ by Maritina Foods",
+    description: "Full-stack e-commerce and food-ordering platform",
+    images: ["/project-4.png", "/project-4b.png", "/project-4c.png", "/project-4d.png", "/project-4e.png"],
+    features: [
+      "Custom authentication, user management, and secure API access",
+      "Product, category, and variant management with stock tracking",
+      "Shopping cart, checkout, and order management system",
+      "Delivery, pickup, address management, and Paystack payment integration",
+    ],
+    stack: ["React", "TypeScript", "PostgreSQL", "Django"],
+    github: "https://github.com/sampsonkpe/maritina_ecommerce",
+    demo: "",
   }
 ];
 
