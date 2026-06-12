@@ -83,7 +83,7 @@ export default function Contact() {
         {/* RESUME BUTTON */}
         <div className="mt-10">
           <a
-            href="/CURRICULUMVITAE.pdf"
+            href="/SAMPSON_KPE_CURRICULUMVITAE.pdf"
             download
             className="inline-flex items-center justify-center gap-3 rounded-lg bg-foreground px-6 py-3 text-sm font-medium text-background transition hover:opacity-80 hover:shadow-lg"
           >
